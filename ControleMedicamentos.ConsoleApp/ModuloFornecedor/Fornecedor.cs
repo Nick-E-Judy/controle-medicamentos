@@ -1,24 +1,19 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ControleMedicamentos.ConsoleApp.ModuloFuncionario
+namespace ControleMedicamentos.ConsoleApp.ModuloFornecedor
 {
-    internal class Funcionario : EntidadeBase
+    internal class Fornecedor : EntidadeBase
     {
-        public Funcionario(string nome, string telefone, string cpf)
+        public Fornecedor(string nome, string telefone, string cnpj)
         {
             Nome = nome;
             Telefone = telefone;
-            Cpf = cpf;
+            Cnpj = cnpj;
         }
 
         public string Nome { get; set; }
         public string Telefone { get; set; }
-        public string Cpf { get; set; }
+        public string Cnpj { get; set; }
 
         public override string[] Validar()
         {
@@ -31,8 +26,8 @@ namespace ControleMedicamentos.ConsoleApp.ModuloFuncionario
             if (string.IsNullOrEmpty(Telefone.Trim()))
                 erros[contadorErros++] = ("O campo \"Telefone\" é obrigatório");
 
-            if (string.IsNullOrEmpty(Cpf.Trim()))
-                erros[contadorErros++] = ("O campo \"CPF\" é obrigatório");
+            if (string.IsNullOrEmpty(Cnpj.Trim()))
+                erros[contadorErros++] = ("O campo \"CNPJ\" é obrigatório");
 
             string[] errosFiltrados = new string[contadorErros];
 

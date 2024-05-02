@@ -35,7 +35,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloFuncionario
 
                 Console.WriteLine(
                     "{0, -10} | {1, -20} | {2, -20} | {3, -15}",
-                    funcionario.Id, funcionario.Nome, funcionario.Telefonte, funcionario.Cpf
+                    funcionario.Id, funcionario.Nome, funcionario.Telefone, funcionario.Cpf
                 );
             }
 
