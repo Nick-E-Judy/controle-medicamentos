@@ -87,7 +87,7 @@
             return false;
         }
 
-        protected void RegistrarItem(EntidadeBase novoRegistro)
+        public virtual void RegistrarItem(EntidadeBase novoRegistro)
         {
             for (int i = 0; i < registros.Length; i++)
             {

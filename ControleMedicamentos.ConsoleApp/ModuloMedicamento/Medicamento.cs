@@ -4,19 +4,18 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
     internal class Medicamento : EntidadeBase
     {
-        public Medicamento(string nome, string descricao, string lote, DateTime dataValidade)
+        public Medicamento(string nome, string descricao, int quantidade, DateTime dataValidade)
         {
             Nome = nome;
             Descricao = descricao;
-            Lote = lote;
+            Quantidade = quantidade;
             DataValidade = dataValidade;
         }
 
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public string Lote { get; set; }
+        public int Quantidade { get; set; }
         private DateTime DataValidade { get; set; }
-        public int Quantidade { get; set; } = 5;
 
         public override string[] Validar()
         {
@@ -29,8 +28,8 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             if (string.IsNullOrEmpty(Descricao.Trim()))
                 erros[contadorErros++] = ("O campo \"descrição\" é obrigatório");
 
-            if (string.IsNullOrEmpty(Lote.Trim()))
-                erros[contadorErros++] = ("O campo \"lote\" é obrigatório");
+            if (Quantidade < 0)
+                erros[contadorErros++] = ("A \"quantidade\" deve ser maior que 0");
 
             DateTime hoje = DateTime.Now.Date;
 

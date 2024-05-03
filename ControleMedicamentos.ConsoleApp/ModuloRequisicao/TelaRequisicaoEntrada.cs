@@ -2,12 +2,6 @@
 using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleMedicamentos.ConsoleApp.ModuloPaciente;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao
 {
@@ -38,7 +32,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao
                 ApresentarErros(erros);
                 return;
             }
-
+            entidade.AcrescentarMedicamento();
             repositorio.Cadastrar(entidade);
 
             ExibirMensagem($"A {tipoEntidade} foi cadastrada com sucesso!", ConsoleColor.Green);
@@ -47,7 +41,40 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao
 
         public override void VisualizarRegistros(bool exibirTitulo)
         {
-            throw new NotImplementedException();
+            if (exibirTitulo)
+            {
+                ApresentarCabecalho();
+
+                Console.WriteLine("Visualizando Requisições de Entrada...");
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -15} | {2, -15} | {3, -20} | {4, -20} | {5, -5}",
+                "Id", "Data de Requisição", "Medicamento", "Fornecedor", "Funcionário", "Quantidade"
+            );
+
+            EntidadeBase[] requisicoesCadastradas = repositorio.SelecionarTodos();
+
+            foreach (RequisicaoEntrada requisicao in requisicoesCadastradas)
+            {
+                if (requisicao == null)
+                    continue;
+
+                Console.WriteLine(
+                    "{0, -10} | {1, -15} | {2, -15} | {3, -20} | {4, -20} | {5, -5}",
+                    requisicao.Id,
+                    requisicao.DataRequisicao.ToShortDateString(),
+                    requisicao.Medicamento.Nome,
+                    requisicao.Fornecedor.Nome,
+                    requisicao.Funcionario.Nome,
+                    requisicao.QuantidadeRequisitada
+                );
+            }
+
+            Console.ReadLine();
+            Console.WriteLine();
         }
 
         protected override EntidadeBase ObterRegistro()

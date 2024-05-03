@@ -45,13 +45,13 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.Write("Digite a descrição: ");
             string descricao = Console.ReadLine();
 
-            Console.Write("Digite o lote: ");
-            string lote = Console.ReadLine();
+            Console.Write("Digite a quantidade: ");
+            int quantidade = Convert.ToInt32(Console.ReadLine());
 
             Console.Write("Digite a data de validade: ");
             DateTime dataValidade = Convert.ToDateTime(Console.ReadLine());
 
-            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade);
+            Medicamento medicamento = new Medicamento(nome, descricao, quantidade, dataValidade);
 
             return medicamento;
         }
