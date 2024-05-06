@@ -1,4 +1,5 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
+using ControleMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
@@ -9,16 +10,25 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             if (exibirTitulo)
             {
                 ApresentarCabecalho();
-
                 Console.WriteLine("Visualizando Medicamentos...");
             }
 
             Console.WriteLine();
 
-            Console.WriteLine(
-                "{0, -10} | {1, -20} | {2, -20}",
-                "Id", "Nome", "Quantidade"
-            );
+            Console.WriteLine("Legenda: ");
+            Console.WriteLine("Branco - Medicamento com estoque");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Amarelo - Medicamento com baixo estoque");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Vermelho - Medicamento em falta");
+            Console.ResetColor();
+
+            Console.WriteLine();
+
+            Console.WriteLine("| {0, -10} | {1, -20} | {2, -35} | {3, -10} |", 
+                "Id", "Nome", "Descrição", "Quantidade");
 
             EntidadeBase[] medicamentosCadastrados = repositorio.SelecionarTodos();
 
@@ -27,81 +37,24 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
                 if (medicamento == null)
                     continue;
 
-                Console.WriteLine(
-                    "{0, -10} | {1, -20} | {2, -20}",
-                    medicamento.Id, medicamento.Nome, medicamento.Quantidade
-                );
-            }
-
-            Console.ReadLine();
-        }
-
-        public void MedicamentosPoucaQuantidade(bool exibirTitulo)
-        {
-            if (exibirTitulo)
-            {
-                ApresentarCabecalho();
-                Console.WriteLine("Visualizando medicamentos com baixa quantidade...");
-            }
-
-            Console.WriteLine();
-
-            Console.WriteLine(
-                "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
-                "Id", "Nome", "Descrição", "Quantidade"
-                );
-
-            Medicamento[] medicamentosPoucaQuantidade = ((RepositorioMedicamento)repositorio).MedicamentosPoucaQuantidade(10);
-
-            if (medicamentosPoucaQuantidade.Length == 0)
-            {
-                ExibirMensagem("Nenhum medicamento com pouca quantidade encontrado.", ConsoleColor.Red);
-            }
-            else
-            {
-                foreach (Medicamento m in medicamentosPoucaQuantidade)
+                ConsoleColor linhaCor = ConsoleColor.White;
+                if (medicamento.Quantidade == 0)
                 {
-                    Console.WriteLine(
-                        "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
-                        m.Id, m.Nome, m.Descricao, m.Quantidade
-                        );
+                    linhaCor = ConsoleColor.Red; 
                 }
-            }
-
-            Console.ReadLine();
-        }
-
-        public void MedicamentosEmFalta(bool exibirTitulo)
-        {
-            if (exibirTitulo)
-            {
-                ApresentarCabecalho();
-                Console.WriteLine("Visualizando medicamentos em falta...");
-            }
-
-            Console.WriteLine();
-
-
-            Console.WriteLine(
-                "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
-                "Id", "Nome", "Descrição", "Quantidade"
-                );
-
-            Medicamento[] medicamentosEmFalta = ((RepositorioMedicamento)repositorio).MedicamentosEmFalta();
-
-            if (medicamentosEmFalta.Length == 0)
-            {
-                ExibirMensagem("Nenhum medicamento em falta encontrado.", ConsoleColor.Red);
-            }
-            else
-            {
-                foreach (Medicamento m in medicamentosEmFalta)
+                else if (medicamento.Quantidade < 20 && medicamento.Quantidade > 0)
                 {
-                    Console.WriteLine(
-                        "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
-                        m.Id, m.Nome, m.Descricao, m.Quantidade
-                        );
+                    linhaCor = ConsoleColor.Yellow;
                 }
+
+                Console.ResetColor();
+
+                Console.ForegroundColor = linhaCor;
+
+                Console.WriteLine("| {0, -10} | {1, -20} | {2, -35} | {3, -10} |",
+                    medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Quantidade);
+
+                Console.ResetColor();
             }
 
             Console.ReadLine();
@@ -124,6 +77,19 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Medicamento medicamento = new Medicamento(nome, descricao, quantidade, dataValidade);
 
             return medicamento;
+        }
+
+        public void CadastrarEntidadeTeste()
+        {
+            Medicamento medicamento = new Medicamento("Dorflex", "Remédio para dor muscular", 25, new DateTime(2025, 12, 3));
+            Medicamento medicamento1 = new Medicamento("Buscopan", "Remédio para cólica", 5, new DateTime(2025, 12, 3));
+            Medicamento medicamento2 = new Medicamento("Paracetamol", "Remédio para dor de cabeça", 0, new DateTime(2025, 12, 3));
+            Medicamento medicamento3 = new Medicamento("Benegripe", "Remédio para gripe", 40, new DateTime(2025, 12, 3));
+
+            repositorio.Cadastrar(medicamento);
+            repositorio.Cadastrar(medicamento1);
+            repositorio.Cadastrar(medicamento2);
+            repositorio.Cadastrar(medicamento3);
         }
     }
 }

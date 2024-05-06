@@ -24,6 +24,8 @@ namespace ControleMedicamentos.ConsoleApp
             telaMedicamento.repositorio = repositorioMedicamento;
             telaMedicamento.tipoEntidade = "Medicamento";
 
+            telaMedicamento.CadastrarEntidadeTeste();
+
             RepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario();
             TelaFuncionario telaFuncionario = new TelaFuncionario();
             telaFuncionario.repositorio = repositorioFuncionario;
@@ -104,11 +106,6 @@ namespace ControleMedicamentos.ConsoleApp
                 else if (operacaoEscolhida == '4')
                     tela.VisualizarRegistros(true);
 
-                else if (operacaoEscolhida == '5')
-                    telaMedicamento.MedicamentosPoucaQuantidade(true);
-
-                else if (operacaoEscolhida == '6')
-                    telaMedicamento.MedicamentosEmFalta(true);
             }
 
             Console.ReadLine();
