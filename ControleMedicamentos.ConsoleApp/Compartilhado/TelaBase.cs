@@ -20,6 +20,12 @@
             Console.WriteLine($"3 - Excluir {tipoEntidade}");
             Console.WriteLine($"4 - Visualizar {tipoEntidade}s");
 
+            if (tipoEntidade == "Medicamento")
+            {
+                Console.WriteLine("5 - Visualizar Medicamentos com Pouca Quantidade");
+                Console.WriteLine("6 - Visualizar Medicamentos em Falta");
+            }
+
             Console.WriteLine("S - Voltar");
 
             Console.WriteLine();
