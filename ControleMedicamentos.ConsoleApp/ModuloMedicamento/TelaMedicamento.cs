@@ -51,7 +51,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
                 "Id", "Nome", "Descrição", "Quantidade"
                 );
 
-            Medicamento[] medicamentosPoucaQuantidade = ((RepositorioMedicamento)repositorio).MedicamentosPoucaQuantidade(10);
+            Medicamento[] medicamentosPoucaQuantidade = ((RepositorioMedicamento)repositorio).MedicamentosPoucaQuantidade(20);
 
             if (medicamentosPoucaQuantidade.Length == 0)
             {
