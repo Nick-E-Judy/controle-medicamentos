@@ -71,6 +71,42 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.ReadLine();
         }
 
+        public void MedicamentosEmFalta(bool exibirTitulo)
+        {
+            if (exibirTitulo)
+            {
+                ApresentarCabecalho();
+                Console.WriteLine("Visualizando medicamentos em falta...");
+            }
+
+            Console.WriteLine();
+
+
+            Console.WriteLine(
+                "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
+                "Id", "Nome", "Descrição", "Quantidade"
+                );
+
+            Medicamento[] medicamentosEmFalta = ((RepositorioMedicamento)repositorio).MedicamentosEmFalta();
+
+            if (medicamentosEmFalta.Length == 0)
+            {
+                ExibirMensagem("Nenhum medicamento em falta encontrado.", ConsoleColor.Red);
+            }
+            else
+            {
+                foreach (Medicamento m in medicamentosEmFalta)
+                {
+                    Console.WriteLine(
+                        "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
+                        m.Id, m.Nome, m.Descricao, m.Quantidade
+                        );
+                }
+            }
+
+            Console.ReadLine();
+        }
+
         protected override EntidadeBase ObterRegistro()
         {
             Console.Write("Digite o nome: ");

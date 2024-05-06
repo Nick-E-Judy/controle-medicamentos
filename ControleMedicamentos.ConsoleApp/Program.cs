@@ -107,8 +107,8 @@ namespace ControleMedicamentos.ConsoleApp
                 else if (operacaoEscolhida == '5')
                     telaMedicamento.MedicamentosPoucaQuantidade(true);
 
-                //else if (opcaoPrincipalEscolhida == '6' && telaMedicamento != null)
-                //    telaMedicamento.VisualizarMedicamentosEmFalta();
+                else if (operacaoEscolhida == '6')
+                    telaMedicamento.MedicamentosEmFalta(true);
             }
 
             Console.ReadLine();

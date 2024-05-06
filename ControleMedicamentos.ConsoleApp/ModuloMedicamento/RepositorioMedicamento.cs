@@ -54,5 +54,32 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             return medicamentosPoucaQuantidade;
         }
 
+        public Medicamento[] MedicamentosEmFalta()
+        {
+            int contador = 0;
+
+            foreach (Medicamento medicamento in registros)
+            {
+                if (medicamento != null && medicamento.Quantidade == 0)
+                {
+                    contador++;
+                }
+            }
+
+            Medicamento[] medicamentosEmFalta = new Medicamento[contador];
+            int index = 0;
+
+            foreach (Medicamento medicamento in registros)
+            {
+                if (medicamento != null && medicamento.Quantidade == 0)
+                {
+                    medicamentosEmFalta[index] = medicamento;
+                    index++;
+                }
+            }
+
+            return medicamentosEmFalta;
+        }
+
     }
 }
