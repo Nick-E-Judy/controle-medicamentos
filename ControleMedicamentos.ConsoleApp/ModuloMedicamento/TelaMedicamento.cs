@@ -34,7 +34,41 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             }
 
             Console.ReadLine();
+        }
+
+        public void MedicamentosPoucaQuantidade(bool exibirTitulo)
+        {
+            if (exibirTitulo)
+            {
+                ApresentarCabecalho();
+                Console.WriteLine("Visualizando medicamentos com baixa quantidade...");
+            }
+
             Console.WriteLine();
+
+            Console.WriteLine(
+                "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
+                "Id", "Nome", "Descrição", "Quantidade"
+                );
+
+            Medicamento[] medicamentosPoucaQuantidade = ((RepositorioMedicamento)repositorio).MedicamentosPoucaQuantidade(10);
+
+            if (medicamentosPoucaQuantidade.Length == 0)
+            {
+                ExibirMensagem("Nenhum medicamento com pouca quantidade encontrado.", ConsoleColor.Red);
+            }
+            else
+            {
+                foreach (Medicamento m in medicamentosPoucaQuantidade)
+                {
+                    Console.WriteLine(
+                        "| {0, -10} | {1, -15} | {2, -15} | {3, -10} |",
+                        m.Id, m.Nome, m.Descricao, m.Quantidade
+                        );
+                }
+            }
+
+            Console.ReadLine();
         }
 
         protected override EntidadeBase ObterRegistro()
