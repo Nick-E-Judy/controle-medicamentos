@@ -107,7 +107,6 @@ namespace ControleMedicamentos.ConsoleApp
                     tela.VisualizarRegistros(true);
 
             }
-
             Console.ReadLine();
         }
     }
