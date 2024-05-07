@@ -90,6 +90,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             repositorio.Cadastrar(medicamento1);
             repositorio.Cadastrar(medicamento2);
             repositorio.Cadastrar(medicamento3);
+
         }
     }
 }
